@@ -1,48 +1,27 @@
 pipeline {
-    agent none
-    tools{
-        jdk 'myjava'
-        maven 'mymaven'
-    }
+    agent any
+
     stages {
-        stage('Compile') {
-            agent any
+        stage('Compiler3') {
             steps {
                 script{
-                    echo "Compiling the code"
-                    git 'https://github.com/preethid/addressbook-1.git'
-                    sh 'mvn compile'
-                  }
-            }
-        }
-        stage('UnitTest') {
-            agent {label 'linux_slave'}
-            steps {
-                script{
-                    echo "Running the test cases"
-                    git 'https://github.com/preethid/addressbook-1.git'
-                    sh 'mvn test'
+                    echo "compiling the code"
                 }
             }
         }
-        stage('Package') {
-            agent any
-           steps {
-                script{                   
-                    sshagent(['build-server-key']) {
-                    echo "Packaging the code"
-                      sh 'mvn package'
-      }
-                  }
-            }
-        }
-        stage('Deploy') {
-            agent any
-           steps {
+        stage('unittest') {
+            steps {
                 script{
-                    echo "Deploying the app"
-                  }
+                    echo "Testing the code"
+                }
+            }
+       }
+        stage('packagejob') {
+            steps {
+                script{
+                    echo "Packaging the code"
+                }
             }
         }
-    }
+    }   
 }
