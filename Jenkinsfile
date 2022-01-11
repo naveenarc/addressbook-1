@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters{
         string (name:'Env',defaultversion:'Test',description:'version to deploy')
-        boolean(name:'testexceution',defaultversion: true,description:'decide to run tc')
+        booleanparam(name:'testexceution',defaultversion: true,description:'decide to run tc')
         choice(name: 'APPVERSION',choices:['1.1','1.2','1.3'])
     }
     stages {
