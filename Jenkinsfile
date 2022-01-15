@@ -32,21 +32,19 @@ pipeline {
                 }
             }
         }
-        stage('deploy') {
-            steps {
-                when
-                {
-                    exprssion{
-                        BRANCH_NAME == 'master'
+        stage('Deploy') {
+            when{
+                expression{
+                    BRANCH_NAME == 'master'
                     }
                 }
-             script{
-                    echo "deploying the app"
-                    echo "deploying to env ${params.Env}"
-                    echo "deploying the app version ${params.APPVERSION}"
-
-                }
+                steps{
+                    script{
+                        echo "deploying the app"
+                        echo "deploying to env ${params.Env}"
+                        echo "deploying the app version ${params.APPVERSION}"
+                    }
+               }
             }
-        }
-    }   
-}
+        }   
+    }
