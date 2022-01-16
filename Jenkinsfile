@@ -29,7 +29,7 @@ pipeline {
             }
        }
         stage('packagejob') {
-            iput{
+            input{
                 message "select the version of the package"
                 ok "Version selected"
                 parameters{
