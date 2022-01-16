@@ -35,12 +35,7 @@ pipeline {
             }
         }
         stage('Deploy') {
-            when{
-                expression{
-                    BRANCH_NAME == 'master'
-                    }
-                }
-                steps{
+            steps{
                     script{
                         echo "deploying the app"
                         echo "deploying to env ${params.Env}"
@@ -50,3 +45,5 @@ pipeline {
             }
         }   
     }
+            
+                
