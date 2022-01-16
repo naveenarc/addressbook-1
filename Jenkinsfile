@@ -21,6 +21,13 @@ pipeline {
             }
        }
         stage('packagejob') {
+            iput{
+                message "select the version of the package"
+                ok "Version selected"
+                parameters{
+                    choice(name: 'NEWAPP',choice:['1.1','1.2','1.3'])
+                }
+            }
             steps {
                 script{
                     echo "Packaging the code"
