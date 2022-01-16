@@ -5,6 +5,9 @@ pipeline {
         booleanParam(name:'testexceution',defaultValue: true,description:'decide to run tc')
         choice(name: 'APPVERSION',choices:['1.1','1.2','1.3'])
     }
+    environment{
+        NEW_VERSION = '2.1'
+    }
     stages {
         stage('Compiler3') {
             steps {
@@ -14,6 +17,11 @@ pipeline {
             }
         }
         stage('unittest') {
+            when{
+                expression{
+                    params.executeTests == True
+                }
+            }
             steps {
                 script{
                     echo "Testing the code"
@@ -25,7 +33,7 @@ pipeline {
                 message "select the version of the package"
                 ok "Version selected"
                 parameters{
-                    choice(name: 'NEWAPP',choices:['1.1','1.2','1.3'])
+                    choice(name: 'NEWAPP',choices:['1.2','2.1','3.1'])
                 }
             }
             steps {
@@ -45,5 +53,5 @@ pipeline {
             }
         }   
     }
-            
+                
                 
